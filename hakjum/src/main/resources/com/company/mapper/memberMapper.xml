@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+	<insert id="save" parameterType="member">
+		insert into hakjum_table(memberId, memberPassword, memberName, korean,
+		english, math)
+		values (#{memberId}, #{memberPassword}, #{memberName}, #{korean},
+		#{english}, #{math})
+	</insert>
+	<select id="login" parameterType="member" resultType="member">
+		select * from hakjum_table where memberId=#{memberId} and
+		memberPassword=#{memberPassword}
+	</select>
+
+	<select id="findAll" resultType="member">
+		select * from hakjum_table;
+	</select>
+
+	<select id="findById" resultType="com.company.dto.MemberDTO">
+		SELECT * FROM hakjum_table WHERE memberId = #{memberId}
+	</select>
+
+	<delete id="delete" parameterType="Long">
+		delete from hakjum_table where id = #{id};
+	</delete>
+
+	<select id="findByMemberId" parameterType="Long"
+		resultType="member">
+		select id, memberId, memberPassword, memberName, korean, english, math
+		from hakjum_table where memberId = #{loginId}
+	</select>
+
+	<update id="update" parameterType="member">
+		update hakjum_table
+		set korean=#{korean},
+		english=#{english},
+		math=#{math}
+		WHERE memberId = #{memberId}
+	</update>
+
+</mapper>
+        
